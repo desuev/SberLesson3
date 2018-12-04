@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btnFirst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mActivityBtnFirstMarginStart"
+        android:layout_marginTop="@dimen/mActivityBtnFirstMarginTop"
+        android:layout_marginEnd="@dimen/mActivityBtnFirstMarginEnd"
+        android:text="@string/mainActivityBtnFirstText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mActivityBtnSecondMarginStart"
+        android:layout_marginTop="@dimen/mActivityBtnSecondMarginTop"
+        android:layout_marginEnd="@dimen/mActivityBtnSecondMarginEnd"
+        android:layout_marginBottom="@dimen/mActivityBtnSecondMarginBottom"
+        android:text="@string/mainActivityBtnSecondText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFirst" />
+
+    <TextView
+        android:id="@+id/serviceStatusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mActivityTextMarginStart"
+        android:layout_marginTop="@dimen/mActivityTextMarginTop"
+        android:layout_marginEnd="@dimen/mActivityTextMarginEnd"
+        android:layout_marginBottom="@dimen/mActivityTextMarginBottom"
+        android:text="@string/mainActivityText"
+        app:layout_constraintBottom_toTopOf="@+id/btnFirst"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mActivityBtnFirstMarginStart">148dp</dimen>
+    <dimen name="mActivityBtnFirstMarginTop">231dp</dimen>
+    <dimen name="mActivityBtnFirstMarginEnd">148dp</dimen>
+    <dimen name="mActivityBtnSecondMarginStart">148dp</dimen>
+    <dimen name="mActivityBtnSecondMarginTop">33dp</dimen>
+    <dimen name="mActivityBtnSecondMarginEnd">148dp</dimen>
+    <dimen name="mActivityBtnSecondMarginBottom">151dp</dimen>
+    <dimen name="mActivityTextMarginStart">155dp</dimen>
+    <dimen name="mActivityTextMarginTop">117dp</dimen>
+    <dimen name="mActivityTextMarginEnd">163dp</dimen>
+    <dimen name="mActivityTextMarginBottom">96dp</dimen>
+</resources>

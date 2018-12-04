@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SberLesson3</string>
+    <string name="mainActivityBtnFirstText">1</string>
+    <string name="mainActivityBtnSecondText">2</string>
+    <string name="mainActivityText">Service: Off</string>
+    <string name="activityForServiceText">Data From Service:</string>
+    <string name="activityForServiceBtn">Stop service</string>
+</resources>
