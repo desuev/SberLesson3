@@ -9,7 +9,10 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MyService extends Service {
@@ -30,13 +33,17 @@ public class MyService extends Service {
             @Override
             public void run() {
                 while(true){
-                    Message msg = new Message();
-                    msg.obj = System.currentTimeMillis();
-                    for(Messenger e: mClients){
-                        try {
-                            e.send(msg);
-                        } catch (RemoteException e1) {
-                            e1.printStackTrace();
+                    if(!mClients.isEmpty()) {
+                        Message msg = new Message();
+                        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                        Date date = new Date();
+                        msg.obj = dateFormat.format(date);
+                        for (Messenger e : mClients) {
+                            try {
+                                e.send(msg);
+                            } catch (RemoteException e1) {
+                                e1.printStackTrace();
+                            }
                         }
                     }
                 }

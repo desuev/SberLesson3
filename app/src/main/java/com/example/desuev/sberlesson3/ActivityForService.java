@@ -78,7 +78,7 @@ public class ActivityForService extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg){
             super.handleMessage(msg);
-            textFromService.setText(String.valueOf(msg.obj));
+            textFromService.setText("Data From Service: " + String.valueOf(msg.obj));
         }
     }
 
