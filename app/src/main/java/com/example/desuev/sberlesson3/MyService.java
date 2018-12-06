@@ -20,6 +20,7 @@ public class MyService extends Service {
 
     public static final int MSG_REGISTER_CLIENT = 1;
     public static final int MSG_UNREGISTER_CLIENT = 0;
+    public static final int EXIT_CODE = -1;
 
     private List<Messenger> mClients = new ArrayList<>();
     private Messenger mMessenger = new Messenger(new IncomingHandler());
@@ -29,21 +30,18 @@ public class MyService extends Service {
 
     @Override
     public void onCreate(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true){
-                    if(!mClients.isEmpty()) {
-                        Message msg = new Message();
-                        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-                        Date date = new Date();
-                        msg.obj = dateFormat.format(date);
-                        for (Messenger e : mClients) {
-                            try {
-                                e.send(msg);
-                            } catch (RemoteException e1) {
-                                e1.printStackTrace();
-                            }
+        new Thread(() -> {
+            while(true){
+                if(!mClients.isEmpty()) {
+                    Message msg = new Message();
+                    DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                    Date date = new Date();
+                    msg.obj = dateFormat.format(date);
+                    for (Messenger e : mClients) {
+                        try {
+                            e.send(msg);
+                        } catch (RemoteException e1) {
+                            e1.printStackTrace();
                         }
                     }
                 }
@@ -54,6 +52,20 @@ public class MyService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return mMessenger.getBinder();
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent){
+               Message msg = new Message();
+               msg.what = EXIT_CODE;
+               for(Messenger e: mClients){
+                   try {
+                       e.send(msg);
+                   } catch (RemoteException e1) {
+                       e1.printStackTrace();
+                   }
+               }
+               return true;
     }
 
     private class IncomingHandler extends Handler{

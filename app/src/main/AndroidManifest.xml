@@ -21,6 +21,13 @@
         <service
             android:name=".MyService"
             android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".SecondActivityForService" />
+
+        <service
+            android:name=".SecondService"
+            android:enabled="true"
             android:exported="true"></service>
     </application>
 

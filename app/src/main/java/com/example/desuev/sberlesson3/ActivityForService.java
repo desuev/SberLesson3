@@ -12,7 +12,6 @@ import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -21,7 +20,8 @@ public class ActivityForService extends AppCompatActivity {
     private Button stopButton;
     private TextView textFromService;
     private Messenger myService;
-    final Messenger  mMessenger = new Messenger(new IncomingHandler());
+    private final Messenger  mMessenger = new Messenger(new IncomingHandler());
+    private boolean isUnbind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,8 @@ public class ActivityForService extends AppCompatActivity {
         initComponents();
         initListeners();
         bindService();
+
+        Log.i("INFO:", "FIRST ACTIVITY STARTED");
     }
 
     @Override
@@ -42,7 +44,7 @@ public class ActivityForService extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
-        unbindService();
+        unBindService();
     }
 
     private void initComponents(){
@@ -51,7 +53,7 @@ public class ActivityForService extends AppCompatActivity {
     }
 
     private void initListeners(){
-        stopButton.setOnClickListener(new ButtonStopClick());
+        stopButton.setOnClickListener(l -> unBindService());
     }
 
     private ServiceConnection myServiceConnection = new ServiceConnection() {
@@ -78,16 +80,20 @@ public class ActivityForService extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg){
             super.handleMessage(msg);
+            if(msg.what == MyService.EXIT_CODE){
+                isUnbind = true;
+                return;
+            }
             textFromService.setText("Data From Service: " + String.valueOf(msg.obj));
         }
     }
 
-
     private void bindService(){
         bindService(MyService.newIntent(ActivityForService.this), myServiceConnection, Context.BIND_AUTO_CREATE);
-}
+        isUnbind = false;
+    }
 
-    private void unbindService(){
+    private void unBindService() {
         Message msg = Message.obtain(null, MyService.MSG_UNREGISTER_CLIENT);
         msg.replyTo = mMessenger;
         try {
@@ -96,13 +102,7 @@ public class ActivityForService extends AppCompatActivity {
             e.printStackTrace();
         }
         unbindService(myServiceConnection);
-    }
-
-    private class ButtonStopClick implements View.OnClickListener{
-        @Override
-        public void onClick(View v) {
-            unbindService();
-        }
+        isUnbind = true;
     }
 
     public static final Intent newIntent(Context context){

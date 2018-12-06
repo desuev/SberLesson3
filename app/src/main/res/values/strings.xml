@@ -5,4 +5,5 @@
     <string name="mainActivityText">Service: Off</string>
     <string name="activityForServiceText">Data From Service:</string>
     <string name="activityForServiceBtn">Stop service</string>
+    <string name="messenger">Messenger</string>
 </resources>

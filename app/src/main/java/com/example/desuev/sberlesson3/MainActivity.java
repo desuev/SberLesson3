@@ -2,15 +2,14 @@ package com.example.desuev.sberlesson3;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Switch;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button btnFirst;
     private Button btnSecond;
-    private TextView serviceStatusText;
+    private Switch servicePatternSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,27 +23,26 @@ public class MainActivity extends AppCompatActivity {
     private void initComponent(){
         btnFirst = findViewById(R.id.btnFirst);
         btnSecond = findViewById(R.id.btnSecond);
-        serviceStatusText = findViewById(R.id.serviceStatusText);
+        servicePatternSwitch = findViewById(R.id.servicePatternSwitch);
     }
 
     private void initListeners(){
-        btnFirst.setOnClickListener(new ButtonFirstClick());
-        btnSecond.setOnClickListener(new ButtonSecondClick());
+        btnFirst.setOnClickListener(l -> {
+            if(servicePatternSwitch.isChecked()) {
+                startService(MyService.newIntent(MainActivity.this));
+            }else{
+                startService(SecondService.newIntent(MainActivity.this));
+            }
+        });
+
+        btnSecond.setOnClickListener(l -> {
+            if(servicePatternSwitch.isChecked()) {
+                startActivity(ActivityForService.newIntent(MainActivity.this));
+            } else{
+                startActivity(SecondActivityForService.newIntent(MainActivity.this));
+            }
+        });
     }
 
-    private class ButtonFirstClick implements View.OnClickListener{
-        @Override
-        public void onClick(View v) {
-            startService(MyService.newIntent(MainActivity.this));
-            serviceStatusText.setText("Service: On");
-        }
-    }
-
-    private class ButtonSecondClick implements View.OnClickListener{
-        @Override
-        public void onClick(View v) {
-            startActivity(ActivityForService.newIntent(MainActivity.this));
-        }
-    }
 
 }

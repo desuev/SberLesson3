@@ -32,15 +32,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnFirst" />
 
-    <TextView
-        android:id="@+id/serviceStatusText"
+    <Switch
+        android:id="@+id/servicePatternSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/mActivityTextMarginStart"
-        android:layout_marginTop="@dimen/mActivityTextMarginTop"
-        android:layout_marginEnd="@dimen/mActivityTextMarginEnd"
-        android:layout_marginBottom="@dimen/mActivityTextMarginBottom"
-        android:text="@string/mainActivityText"
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="123dp"
+        android:layout_marginEnd="137dp"
+        android:layout_marginBottom="81dp"
+        android:checked="false"
+        android:text="@string/messenger"
         app:layout_constraintBottom_toTopOf="@+id/btnFirst"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
