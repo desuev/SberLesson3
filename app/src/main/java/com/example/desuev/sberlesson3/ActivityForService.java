@@ -38,6 +38,7 @@ public class ActivityForService extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        isUnbind = false;
         bindService();
     }
 
@@ -101,8 +102,10 @@ public class ActivityForService extends AppCompatActivity {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        unbindService(myServiceConnection);
-        isUnbind = true;
+        if(isUnbind) {
+            unbindService(myServiceConnection);
+            isUnbind = true;
+        }
     }
 
     public static final Intent newIntent(Context context){

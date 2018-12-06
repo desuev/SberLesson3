@@ -49,9 +49,7 @@ public class SecondActivityForService extends AppCompatActivity implements Obser
     }
 
     private void initListeners(){
-        stopServiceBtn.setOnClickListener( l -> {
-
-        });
+        stopServiceBtn.setOnClickListener( l -> unbindService());
     }
 
     private void bindService(){
@@ -59,6 +57,7 @@ public class SecondActivityForService extends AppCompatActivity implements Obser
     }
 
     private void unbindService(){
+        currentDataService.unregisterListener(SecondActivityForService.this);
         unbindService(sv);
     }
 
@@ -72,7 +71,7 @@ public class SecondActivityForService extends AppCompatActivity implements Obser
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            currentDataService.unregisterListener(SecondActivityForService.this);
+            currentDataService = null;
         }
     };
 
